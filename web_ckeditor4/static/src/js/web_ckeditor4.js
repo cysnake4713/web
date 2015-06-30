@@ -121,7 +121,7 @@ openerp.web_ckeditor4 = function(instance)
         ckeditor_config: {
             removePlugins: 'iframe,flash,forms,smiley,pagebreak,stylescombo',
             filebrowserImageUploadUrl: 'dummy',
-            extraPlugins: 'filebrowser',
+            extraPlugins: 'filebrowser,lineheight',
             // this is '#39' per default which screws up single quoted text in ${}
             entities_additional: '',
             font_names: '宋体/宋体;黑体/黑体;仿宋/仿宋_GB2312;楷体/楷体_GB2312;隶书/隶书;幼圆/幼圆;微软雅黑/微软雅黑;' + CKEDITOR.config.font_names
@@ -132,7 +132,7 @@ openerp.web_ckeditor4 = function(instance)
         {
             this._super.apply(this, arguments);
     
-            CKEDITOR.lang.load(instance.session.user_context.lang.replace('_','-'), 'en', function() {});
+            CKEDITOR.lang.load(instance.session.user_context.lang.replace('_','-').toLowerCase(), 'en', function() {});
         },
         initialize_content: function()
         {
@@ -145,7 +145,7 @@ openerp.web_ckeditor4 = function(instance)
             this.editor = CKEDITOR.replace(this.$textarea.get(0),
                 _.extend(
                     {
-                        language: instance.session.user_context.lang.replace('_','-'),
+                        language: instance.session.user_context.lang.replace('_','-').toLowerCase(),
                         on:
                         {
                             'change': function()
